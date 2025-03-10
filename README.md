@@ -2,30 +2,46 @@
 
 ## Description
 
-**MapMyPlaces** is a full-stack MERN application that allows users to explore and save their **favorite places on a map**. The app features an interactive map with custom pins, a list view of all saved places, and the option to add new places to the list by providing location details (name, latitude, longitude, and description).
+MapMyPlaces is a full-stack MERN application that allows users to explore and save their favorite places on a map.  
+The app features an interactive map with custom pins, a list view of all saved places, and the option to add new places  
+by providing location details (name, latitude, longitude, and description).  
 
 ## Table of Contents
 
 - [Features](#features)
 - [Technologies Used](#tech-stack)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Project Status](#project-status)
+- [Future Improvements](#future-improvements)
 <!-- - [Screenshots](#screenshots) -->
-<!-- - [Setup](#setup) -->
-<!-- - [Usage](#usage) -->
-<!-- - [Project Status](#project-status) -->
-<!-- - [Room for Improvement](#room-for-improvement) -->
 <!-- - [Acknowledgements](#acknowledgements) -->
-<!-- - [Contact](#contact)  -->
+<!-- - [Contact](#contact) -->
 
-### Features:
+## Features
 
-* Interactive map with custom location pins.
-* View and manage a list of saved places.
-* Add new places with location details and descriptions.
-* User authentication (optional) to save places.
+✅ Interactive map with custom location pins.  
+✅ View and manage a list of saved places.  
+✅ Add new places with location details and descriptions.  
+✅ User authentication (optional) to save places.  
 
-### Tech Stack:
+## Tech Stack
 
-* __Frontend__: React.js 
-* __Backend__: Node.js, Express.js
-* __Database__: MongoDB
+🖥️ **Frontend**: React.js (Vite, Bootstrap, Leaflet.js for maps)  
+🖥️ **Backend**: Node.js, Express.js  
+💾 **Database**: MongoDB (via Mongoose)  
 
+## Installation
+
+### Prerequisites  
+Ensure you have the following installed:  
+- **Node.js** (v18+) → [Download Node.js](https://nodejs.org/)  
+- **MongoDB** (local or cloud-based like [MongoDB Atlas](https://www.mongodb.com/atlas))  
+- **Git**  
+
+### Steps to Set Up the Project  
+
+1️⃣ **Clone the repository**  
+```sh
+git clone https://github.com/your-username/MapMyPlaces.git
+cd MapMyPlaces
