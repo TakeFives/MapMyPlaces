@@ -1,0 +1,44 @@
+/* Murky Teal – #022831
+Blue Lagoon – #04566E
+Pastel Green – #689368
+Green Pear – #B4D330
+Blustery Blue – #D8DFE9 */
+:root {
+  /* BACKGROUND */
+  --clr-bg-main: #D8DFE9; /* Blustery Blue */
+  --clr-bg-play-outer: #04566E; /* Blue Lagoon */
+  --clr-bg-play: #D8DFE9; /* Blustery Blue */
+
+  --clr-bg-link: #FFFFFF; /* White for link background */
+  --clr-bg-link-hover: #689368; /* Pastel Green for link hover */
+
+  /* TEXT */
+  --clr-text-light: #FFFFFF; /* White for light text */
+  --clr-text-dark: #022831; /* Murky Teal for dark text */
+  --clr-text-grey: #374754; /* Dark grey for neutral text */
+
+  /* BUTTON */
+  --clr-btn-bg-primary: #04566E; /* Blue Lagoon for button background */
+  --clr-bg-btn-hover: #B4D330; /* Green Pear for button hover */
+}
+
+/* Bootstrap overrides */
+.bg-primary {
+  background-color: var(--clr-btn-bg-primary) !important;
+}
+
+.text-white {
+  color: var(--clr-text-light) !important;
+}
+
+.bg-light {
+  background-color: var(--clr-bg-main) !important;
+}
+
+.bg-dark {
+  background-color: var(--clr-text-dark) !important;
+}
+
+.nav-link:hover {
+  color: var(--clr-bg-link-hover) !important;
+}

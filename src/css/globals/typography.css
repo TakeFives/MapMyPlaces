@@ -1,0 +1,35 @@
+:root {
+  --ff: "Manrope", sans-serif;
+
+  --fw-black: 880;
+  --fw-bold: 700;
+  --fw-regular: 400;
+  --fw-light: 300;
+  --fw-thin: 200;
+
+  --fs-800: clamp(3rem, 2.125rem + 3.3333vw, 4.625rem);
+  --fs-750: 3rem;
+  --fs-700: clamp(1.75rem, 1.649rem + 0.3846vw, 1.9375rem);
+  --fs-650: 1.75rem;
+  --fs-600: 1.25rem;
+  --fs-400: 1rem;
+
+  --fs-heading-xl: normal var(--fw-bold) var(--fs-800) / 1.29 var(--ff);
+  --fs-heading-l: normal var(--fw-regular) var(--fs-750) / 1.15 var(--ff);
+  --fs-headline-l: normal var(--fw-thin) var(--fs-700) / 1.43 var(--ff);
+  --fs-subheading-l: normal var(--fw-light) var(--fs-650) / 1.43 var(--ff);
+  --fs-subheading-m: normal var(--fw-bold) var(--fs-600) / 1.4 var(--ff);
+  --fs-paragraph: normal var(--fw-regular) var(--fs-400) / 1.5 var(--ff);
+}
+
+h1 {
+  font: var(--fs-heading-xl);
+}
+h2, h3{
+  font: var(--fs-heading-l);
+}
+
+p {
+  font: var(--fs-paragraph);
+  color: var(--clr-text-grey);
+}

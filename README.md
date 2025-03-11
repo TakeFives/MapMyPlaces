@@ -45,3 +45,22 @@ Ensure you have the following installed:
 ```sh
 git clone https://github.com/your-username/MapMyPlaces.git
 cd MapMyPlaces
+```
+
+2️⃣ **Install dependencies**  
+```sh
+npm install
+```
+<!-- 
+3️⃣ **Set up environment variables**  
+Create a `.env` file in the root directory and add the following:
+```env
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_secret_key
+PORT=5000
+``` -->
+
+3️⃣ **Run the development server**  
+```sh
+npm run dev
+```
