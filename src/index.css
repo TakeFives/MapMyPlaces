@@ -1,3 +1,5 @@
 @import '/src/css/globals/reset.css';
 @import '/src/css/globals/typography.css';
 @import '/src/css/globals/colors.css';
+
+@import '/src/css/components/map.css';
