@@ -1,0 +1,4 @@
+.navbar-brand {
+    color: var(--clr-text-light);
+    font: var(--fs-logo-xl);
+}
