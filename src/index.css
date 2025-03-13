@@ -2,4 +2,7 @@
 @import '/src/css/globals/typography.css';
 @import '/src/css/globals/colors.css';
 
+@import '/src/css/components/header.css';
+@import '/src/css/components/hero-layout.css';
+@import '/src/css/components/hero.css';
 @import '/src/css/components/map.css';
