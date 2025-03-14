@@ -66,3 +66,15 @@ select {
   font: inherit;
 }
 
+button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+button:focus,
+.btn:focus {
+  border: none;
+  outline: none;
+  box-shadow: none;
+}

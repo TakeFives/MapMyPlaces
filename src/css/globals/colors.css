@@ -17,6 +17,7 @@ Sage (8F9E79) → Neutral text or subtle accents */
   --clr-bg-play-outer-transparent: hsla(198, 56%, 23%, 0.4); 
 
   --clr-bg-link: hsl(0, 0%, 100%);
+  --clr-bg-link-dark: hsl(205, 36%, 47%);
   --clr-bg-link-hover: hsl(205, 36%, 47%);
   --clr-bg-link-hover-light: hsl(72, 79%, 40%); 
 

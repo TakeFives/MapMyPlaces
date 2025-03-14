@@ -1,4 +1,5 @@
 @import '/src/css/globals/reset.css';
+@import '/src/css/globals/breakpoints.css';
 @import '/src/css/globals/typography.css';
 @import '/src/css/globals/colors.css';
 @import '/src/css/globals/global.css';
@@ -7,4 +8,5 @@
 @import '/src/css/components/hero-layout.css';
 @import '/src/css/components/hero.css';
 @import '/src/css/components/map.css';
+@import '/src/css/components/places.css';
 @import '/src/css/components/cards.css';

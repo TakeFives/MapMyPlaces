@@ -1,10 +1,18 @@
+import React, { useState } from "react";
 import "./App.css";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import data from "./data/data.json";
 
 function App() {
   // Default Map Position
   const position = [51.0447, -114.0719]; // Calgary, Alberta
+  const places = data.locations;
 
+  const [activeItemMapId, setActiveItemMapId] = useState(null);
+
+  const toggleShowMap = (id) => {
+    setActiveItemMapId((prevId) => (prevId === id ? null : id));
+  };
   return (
     <>
       {/* Header Section */}
@@ -16,7 +24,7 @@ function App() {
             </a>
 
             <button
-              class="navbar-toggler border-0 burger-menu"
+              className="navbar-toggler border-0 burger-menu"
               type="button"
               data-bs-toggle="collapse"
               data-bs-target="#navbarNav"
@@ -24,9 +32,9 @@ function App() {
               aria-expanded="false"
               aria-label="Toggle navigation"
             >
-              <span class="burger-menu__first-line"></span>
-              <span class="burger-menu__second-line"></span>
-              <span class="burger-menu__third-line"></span>
+              <span className="burger-menu__first-line"></span>
+              <span className="burger-menu__second-line"></span>
+              <span className="burger-menu__third-line"></span>
             </button>
 
             <div
@@ -103,64 +111,54 @@ function App() {
       </section>
 
       {/* Places List Section */}
-      <section id="places" className="bg-light py-5">
+      <section id="places" className="bg-light places-container py-5">
         <div className="container">
-          <h2 className="text-center mb-4">Saved Places</h2>
+          <h2 className="text-center mb-5">Saved Places</h2>
 
-          <div className="flex cards-container">
-            {/* Card 1 */}
-            <div class="card bg-dark text-white">
-              <img
-                class="card-img"
-                src="src/assets/images/featured-image-1.png"
-                alt="Card image"
-              />
-              <div class="card-img-overlay">
-                <h3 class="card-title text-white">Card title</h3>
-                <p class="card-text text-white">
-                  This is a wider card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit
-                  longer.
-                </p>
-                <span>Location</span>
-              </div>
-            </div>
+          <div className="flex cards-container pt-4 pb-4">
+            {places.map((item, index) => {
+              return (
+                <div
+                  className={`card flex-md-row flex-column-reverse ${
+                    index % 2 === 0 ? "" : "flex-md-row-reverse"
+                  }`}
+                  key={item.id}
+                >
+                  <div className="card__preview container-fliud">
+                    {activeItemMapId === item.id ? (
+                      <div className="card__map">
+                        <MapContainer
+                          center={item.coordinates} // Use item's coordinates
+                          zoom={13}
+                          className="leaflet-container"
+                        >
+                          <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+                          <Marker position={item.coordinates}>
+                            <Popup>{item.name} Location</Popup>
+                          </Marker>
+                        </MapContainer>
+                      </div>
+                    ) : (
+                      <div className="card__image">
+                        <img src={item.image} alt={item.name} />
+                      </div>
+                    )}
+                  </div>
 
-            {/* Card 2 */}
-            <div class="card bg-dark text-white">
-              <img
-                class="card-img"
-                src="src/assets/images/featured-image-2.png"
-                alt="Card image"
-              />
-              <div class="card-img-overlay">
-                <h3 class="card-title text-white">Card title</h3>
-                <p class="card-text text-white">
-                  This is a wider card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit
-                  longer.
-                </p>
-                <span>Location</span>
-              </div>
-            </div>
-
-            {/* Card 3 */}
-            <div class="card bg-dark text-white">
-              <img
-                class="card-img"
-                src="src/assets/images/featured-image-3.png"
-                alt="Card image"
-              />
-              <div class="card-img-overlay">
-                <h3 class="card-title text-white">Card title</h3>
-                <p class="card-text text-white">
-                  This is a wider card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit
-                  longer.
-                </p>
-                <span>Location</span>
-              </div>
-            </div>
+                  <div className="card__description">
+                    <h3 className="card__title">{item.name}</h3>
+                    <p className="card__text">{item.description}</p>
+                    <button
+                      type="button"
+                      className="btn card__location-btn"
+                      onClick={() => toggleShowMap(item.id)}
+                    >
+                      View map {item.name}
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
