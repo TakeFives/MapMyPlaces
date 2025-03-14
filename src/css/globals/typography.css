@@ -29,9 +29,15 @@ h1 {
 }
 h2, h3{
   font: var(--fs-heading-l);
+  color: var(--clr-text-dark);
 }
 
 p {
   font: var(--fs-paragraph);
   color: var(--clr-text-grey);
+}
+
+.copyright {
+  font: var(--fs-paragraph);
+  color: var(--clr-text-lightblue);
 }

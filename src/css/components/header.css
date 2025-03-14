@@ -1,4 +1,29 @@
-.navbar-brand {
-    color: var(--clr-text-light);
-    font: var(--fs-logo-xl);
+.navbar-light .navbar-brand {
+  color: var(--clr-btn-bg-primary);
+  font: var(--fs-logo-xl);
+}
+.burger-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding: 0 !important;
+}
+
+.burger-menu__first-line,
+.burger-menu__second-line,
+.burger-menu__third-line {
+  height: 2px;
+  display: inline-block;
+  background: var(--clr-btn-bg-primary);
+  width: 30px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.burger-menu[aria-expanded="true"] .burger-menu__first-line {
+  transform: rotate(45deg) translate(6px, 7px);
+}
+.burger-menu[aria-expanded="true"] .burger-menu__second-line {
+  opacity: 0;
+}
+.burger-menu[aria-expanded="true"] .burger-menu__third-line {
+  transform: rotate(-45deg) translate(6px, -7px);
 }

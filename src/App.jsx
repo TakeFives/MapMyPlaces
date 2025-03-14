@@ -1,27 +1,22 @@
 import "./App.css";
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
 function App() {
-
   // Default Map Position
   const position = [51.0447, -114.0719]; // Calgary, Alberta
-
 
   return (
     <>
       {/* Header Section */}
       <header className="fixed-top bg-transparent">
-        <nav className="navbar navbar-expand-lg navbar-light bg-transparent">
+        <nav className="navbar navbar-expand-lg navbar-light bg-dark">
           <div className="container-fluid">
-            
-            {/* Logo on the Left */}
-            <a className="navbar-brand text-white fw-bold" href="/">
+            <a className="navbar-brand fw-bold" href="/">
               MapMyPlaces
             </a>
 
-            {/* Toggle Button on the Right (for Mobile) */}
             <button
-              className="navbar-toggler border-0"
+              class="navbar-toggler border-0 burger-menu"
               type="button"
               data-bs-toggle="collapse"
               data-bs-target="#navbarNav"
@@ -29,37 +24,59 @@ function App() {
               aria-expanded="false"
               aria-label="Toggle navigation"
             >
-              <span className="navbar-toggler-icon"></span>
+              <span class="burger-menu__first-line"></span>
+              <span class="burger-menu__second-line"></span>
+              <span class="burger-menu__third-line"></span>
             </button>
 
-            {/* Collapsible Menu (Opens Below on Mobile) */}
-            <div className="collapse navbar-collapse flex-lg-grow-0" id="navbarNav">
-              <ul className="navbar-nav ms-auto mt-3 mt-lg-0 text-center">
+            <div
+              className="collapse navbar-collapse flex-lg-grow-0"
+              id="navbarNav"
+            >
+              <ul className="navbar-nav ms-auto mt-4 mb-4 mt-lg-0 mb-lg-0 text-center">
                 <li className="nav-item">
-                  <a className="nav-link text-white" href="#hero">Home</a>
+                  <a className="nav-link" href="#hero">
+                    Home
+                  </a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link text-white" href="#map">MyMap</a>
+                  <a className="nav-link" href="#map">
+                    MyMap
+                  </a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link text-white" href="#places">MyPlaces</a>
+                  <a className="nav-link" href="#places">
+                    MyPlaces
+                  </a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link text-white" href="#contact">Contact</a>
+                  <a className="nav-link" href="#contact">
+                    Contact
+                  </a>
                 </li>
               </ul>
             </div>
-
           </div>
         </nav>
       </header>
 
       {/* Hero Section */}
-      <section id="hero" className="hero text-center text-white d-flex align-items-center justify-content-center" style={{ height: "100vh", paddingTop: "80px" }}>
-        <div className="container">
+      <section
+        id="hero"
+        className="hero text-center text-white d-flex align-items-center justify-content-center"
+      >
+        <div className="container w-75">
           <h1 className="fw-bold">Discover & Save Your Favorite Places</h1>
-          <p>Map your places using address data or pin it to save</p>
-          <a href="#map">Check out the map</a>
+          <p className="text-white my-4">
+            Map your places using address data or pin it to save
+          </p>
+          <a
+            href="#map"
+            aria-label="Go to Map section"
+            className="btn btn-primary"
+          >
+            Check out the map
+          </a>
         </div>
       </section>
 
@@ -89,17 +106,70 @@ function App() {
       <section id="places" className="bg-light py-5">
         <div className="container">
           <h2 className="text-center mb-4">Saved Places</h2>
-          <ul className="list-group">
-            <li className="list-group-item">Place 1 </li>
-            <li className="list-group-item">Place 2 </li>
-            <li className="list-group-item">Place 3 </li>
-          </ul>
+
+          <div className="flex cards-container">
+            {/* Card 1 */}
+            <div class="card bg-dark text-white">
+              <img
+                class="card-img"
+                src="src/assets/images/featured-image-1.png"
+                alt="Card image"
+              />
+              <div class="card-img-overlay">
+                <h3 class="card-title text-white">Card title</h3>
+                <p class="card-text text-white">
+                  This is a wider card with supporting text below as a natural
+                  lead-in to additional content. This content is a little bit
+                  longer.
+                </p>
+                <span>Location</span>
+              </div>
+            </div>
+
+            {/* Card 2 */}
+            <div class="card bg-dark text-white">
+              <img
+                class="card-img"
+                src="src/assets/images/featured-image-2.png"
+                alt="Card image"
+              />
+              <div class="card-img-overlay">
+                <h3 class="card-title text-white">Card title</h3>
+                <p class="card-text text-white">
+                  This is a wider card with supporting text below as a natural
+                  lead-in to additional content. This content is a little bit
+                  longer.
+                </p>
+                <span>Location</span>
+              </div>
+            </div>
+
+            {/* Card 3 */}
+            <div class="card bg-dark text-white">
+              <img
+                class="card-img"
+                src="src/assets/images/featured-image-3.png"
+                alt="Card image"
+              />
+              <div class="card-img-overlay">
+                <h3 class="card-title text-white">Card title</h3>
+                <p class="card-text text-white">
+                  This is a wider card with supporting text below as a natural
+                  lead-in to additional content. This content is a little bit
+                  longer.
+                </p>
+                <span>Location</span>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Footer Section */}
-      <footer className="bg-dark text-white text-center py-3">
-        <p>&copy; 2025 MapMyPlaces. All rights reserved.</p>
+      <footer className="bg-dark text-center py-3">
+        <p className="copyright">
+          &copy; 2025 MapMyPlaces. All rights reserved.
+        </p>
       </footer>
     </>
   );
