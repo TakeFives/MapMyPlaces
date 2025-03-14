@@ -1,0 +1,26 @@
+.cards-container{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.card{
+    border:none;
+    border-radius: 0 !important;
+    overflow: hidden;
+}
+.card-img{
+    max-height: 16.875rem;
+    object-fit: cover;
+    transition: max-height 0.5s ease-in-out;
+}
+.card:hover .card-img{
+    max-height: 29.375rem;
+}
+.card-img-overlay{
+    background-color: var(--clr-bg-play-outer-transparent);
+    transition: background-color 0.5s ease-in-out;
+
+}
+.card-img-overlay:hover{
+    background-color: transparent;
+}

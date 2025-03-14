@@ -1,25 +1,34 @@
-/* Murky Teal – #022831
-Blue Lagoon – #04566E
-Pastel Green – #689368
-Green Pear – #B4D330
-Blustery Blue – #D8DFE9 */
+/* Rock Blue (9ABECA) → Background color and button colors
+Nile Blue (1A495D) → Text and background elements
+Crete (69762C) → Accent elements or button hover states
+Thatch Green (46511A) → Backgrounds or secondary elements
+Link Water (E0EFF8) → Main background color
+Wedgewood (4D7FA3) → Link or text hover states
+Sage (8F9E79) → Neutral text or subtle accents */
+
 :root {
   /* BACKGROUND */
-  --clr-bg-main: #D8DFE9; /* Blustery Blue */
-  --clr-bg-play-outer: #04566E; /* Blue Lagoon */
-  --clr-bg-play: #D8DFE9; /* Blustery Blue */
+  --clr-bg-main: hsl(203, 63%, 93%); 
+  --clr-bg-light: hsl(0, 0%, 100%); 
+  --clr-bg-play-outer: hsl(198, 56%, 23%);
+  --clr-bg-play-inner: hsl(72, 51%, 21%); 
+  --clr-bg-play-accent: hsl(72, 79%, 40%); 
+  --clr-bg-play: hsl(203, 63%, 93%); 
+  --clr-bg-play-outer-transparent: hsla(198, 56%, 23%, 0.4); 
 
-  --clr-bg-link: #FFFFFF; /* White for link background */
-  --clr-bg-link-hover: #689368; /* Pastel Green for link hover */
+  --clr-bg-link: hsl(0, 0%, 100%);
+  --clr-bg-link-hover: hsl(205, 36%, 47%);
+  --clr-bg-link-hover-light: hsl(72, 79%, 40%); 
 
   /* TEXT */
-  --clr-text-light: #FFFFFF; /* White for light text */
-  --clr-text-dark: #022831; /* Murky Teal for dark text */
-  --clr-text-grey: #374754; /* Dark grey for neutral text */
+  --clr-text-light: hsl(0, 0%, 100%);
+  --clr-text-dark: hsl(198, 56%, 23%); 
+  --clr-text-grey: hsl(207, 21%, 27%);
+  --clr-text-lightblue:  hsl(195, 31%, 70%);
 
   /* BUTTON */
-  --clr-btn-bg-primary: #04566E; /* Blue Lagoon for button background */
-  --clr-bg-btn-hover: #B4D330; /* Green Pear for button hover */
+  --clr-btn-bg-primary: hsl(195, 31%, 70%); 
+  --clr-bg-btn-hover: hsl(71, 46%, 32%); 
 }
 
 /* Bootstrap overrides */
@@ -39,6 +48,9 @@ Blustery Blue – #D8DFE9 */
   background-color: var(--clr-text-dark) !important;
 }
 
+.nav-link {
+  color: var(--clr-btn-bg-primary) !important;
+}
 .nav-link:hover {
-  color: var(--clr-bg-link-hover) !important;
+  color: var(--clr-text-light) !important;
 }
