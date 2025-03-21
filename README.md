@@ -64,3 +64,22 @@ PORT=5000
 ```sh
 npm run dev
 ```
+
+## Future Improvements
+
+Planned roadmap:
+
+- Create basic Homepage Layout - DONE
+- Set Sections for Main Map and List of Places Below - DONE
+- Refactor App.jsx to Components
+- Set Listener to retrieve coordinates data
+- Switch from LeafLet Maps to Geocoding API
+- Integrate Google Maps API for place Name search
+- Make Adding New Places functionality
+- Make Fav Places Functionality
+- Add Places details
+- Add Authentication
+- Add page for User Fav Maps
+- Think of Map Layers and other features to implement
+
+
