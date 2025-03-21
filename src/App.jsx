@@ -1,6 +1,5 @@
 import React from "react";
 import "./App.css";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
 import Header from "./components/global/Header";
 import Hero from "./components/featured/Hero";

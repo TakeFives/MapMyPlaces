@@ -71,9 +71,9 @@ Planned roadmap:
 
 - Create basic Homepage Layout - DONE
 - Set Sections for Main Map and List of Places Below - DONE
-- Refactor App.jsx to Components
-- Set Listener to retrieve coordinates data
-- Switch from LeafLet Maps to Geocoding API
+- Refactor App.jsx to Components - DONE
+- Switch/Connect LeafLet Maps / Geocoding API - **In progress**
+- Set Listener to retrieve coordinates data 
 - Integrate Google Maps API for place Name search
 - Make Adding New Places functionality
 - Make Fav Places Functionality
