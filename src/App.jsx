@@ -6,6 +6,7 @@ import Hero from "./components/featured/Hero";
 import Map from "./components/featured/Map";
 import Places from "./components/featured/Places";
 import Footer from "./components/global/Footer";
+import GMap from "./components/templates/MainMap";
 
 function App() {
   return (
