@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import data from "../../data/data.json";
+import SingleMap from "../templates/SingleMap";
 
 function Places() {
   const places = data.locations;
@@ -29,7 +29,7 @@ function Places() {
                   <div className="card__preview container-fliud">
                     {activeItemMapId === item.id ? (
                       <div className="card__map">
-                        <MapContainer
+                        {/* <MapContainer
                           center={item.coordinates}
                           zoom={13}
                           className="leaflet-container"
@@ -38,7 +38,9 @@ function Places() {
                           <Marker position={item.coordinates}>
                             <Popup>{item.name} Location</Popup>
                           </Marker>
-                        </MapContainer>
+                        </MapContainer> */}
+                        <SingleMap place={item}/>
+
                       </div>
                     ) : (
                       <div className="card__image">
