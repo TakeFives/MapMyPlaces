@@ -1,8 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import FormMap from "../templates/FormMap";
 import { useGoogleMapsApi } from "../../services/api/googleMapsApi.js";
+import { formValidation } from "../../services/validators/formValidation.js";
 
 function Form() {
+
+  // state
   const { isLoaded } = useGoogleMapsApi();
   const inputRef = useRef(null);
 
@@ -14,13 +17,20 @@ function Form() {
     lng: null,
   });
 
+  const [errors, setErrors] = useState({
+    placeName: "",
+    placePreferedName: "",
+    placeDescription: "",
+  });
+
+  // hooks
   useEffect(() => {
     if (!isLoaded || !window.google || !inputRef.current) return;
 
     const autocomplete = new window.google.maps.places.Autocomplete(
       inputRef.current,
       {
-        types: ["geocode"],
+        types: ["geocode", "establishment"],
       }
     );
 
@@ -39,6 +49,7 @@ function Form() {
     return () => autocomplete.unbindAll();
   }, [isLoaded]);
 
+  //handlers
   function handleInputChange(e) {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -47,6 +58,7 @@ function Form() {
   function handleSubmit(e) {
     e.preventDefault();
     console.log(formData)
+    formValidation(formData, setErrors);
   }
 
   return (
@@ -67,6 +79,8 @@ function Form() {
                   placeholder="Enter place name"
                   ref={inputRef}
                 />
+                {errors.placeName && <span className="error">{errors.placeName}</span>}
+
               </div>
               <div className="form-group">
                 <label htmlFor="map" className="form-group__label">
@@ -88,6 +102,8 @@ function Form() {
                   value={formData.placePreferredName}
                   onChange={handleInputChange}
                 />
+                {errors.placePreferedName && <span className="error">{errors.placePreferedName}</span>}
+
                 <label htmlFor="placeDescription" className="form-group__label">
                   Description
                 </label>
@@ -97,6 +113,7 @@ function Form() {
                   placeholder="Tell us about the place"
                   onChange={handleInputChange}
                 ></textarea>
+                {errors.placeDescription && <span className="error">{errors.placeDescription}</span>}
               </div>
               <button type="submit" className="btn btn-primary">
                 Add this place

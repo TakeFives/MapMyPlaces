@@ -29,18 +29,7 @@ function Places() {
                   <div className="card__preview container-fliud">
                     {activeItemMapId === item.id ? (
                       <div className="card__map">
-                        {/* <MapContainer
-                          center={item.coordinates}
-                          zoom={13}
-                          className="leaflet-container"
-                        >
-                          <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-                          <Marker position={item.coordinates}>
-                            <Popup>{item.name} Location</Popup>
-                          </Marker>
-                        </MapContainer> */}
                         <SingleMap place={item}/>
-
                       </div>
                     ) : (
                       <div className="card__image">

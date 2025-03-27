@@ -33,6 +33,9 @@ Sage (8F9E79) → Neutral text or subtle accents */
 
   /* INPUT, TEXTAREA, SELECT */
   --clr-brd: hsl(207, 13%, 83%); 
+
+  /* ERRORS, ALERTS */
+  --clr-text-error: hsl(0, 61%, 45%); 
 }
 
 /* Bootstrap overrides */
@@ -55,6 +58,11 @@ Sage (8F9E79) → Neutral text or subtle accents */
 .nav-link {
   color: var(--clr-btn-bg-primary) !important;
 }
+
 .nav-link:hover {
   color: var(--clr-text-light) !important;
+}
+
+.error{
+  color: var( --clr-text-error);
 }
