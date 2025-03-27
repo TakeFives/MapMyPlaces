@@ -1,0 +1,9 @@
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group__label {
+    padding-block: 1rem;
+    margin: 0;
+}

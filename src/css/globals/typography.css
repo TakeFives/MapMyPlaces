@@ -41,3 +41,7 @@ p {
   font: var(--fs-paragraph);
   color: var(--clr-text-lightblue);
 }
+
+.form-group{
+  --fs-paragraph: normal var(--fw-regular) var(--fs-400) / 1.5 var(--ff);
+}
