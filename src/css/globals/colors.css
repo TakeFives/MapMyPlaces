@@ -30,6 +30,9 @@ Sage (8F9E79) → Neutral text or subtle accents */
   /* BUTTON */
   --clr-btn-bg-primary: hsl(195, 31%, 70%); 
   --clr-bg-btn-hover: hsl(71, 46%, 32%); 
+
+  /* INPUT, TEXTAREA, SELECT */
+  --clr-brd: hsl(207, 13%, 83%); 
 }
 
 /* Bootstrap overrides */
