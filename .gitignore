@@ -31,3 +31,12 @@ dist-ssr
 
 # Private files
 .env
+
+# Ignore .DS_Store files (macOS)
+.DS_Store
+
+# Ignore .vite/deps folder (Vite dependencies)
+frontend/.vite/deps/
+
+# Ignore Vite config file in frontend
+frontend/vite.config.js
