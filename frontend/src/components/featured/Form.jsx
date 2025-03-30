@@ -4,7 +4,6 @@ import { useGoogleMapsApi } from "../../services/api/googleMapsApi.js";
 import { formValidation } from "../../services/validators/formValidation.js";
 
 function Form() {
-
   // state
   const { isLoaded } = useGoogleMapsApi();
   const inputRef = useRef(null);
@@ -15,12 +14,16 @@ function Form() {
     placeDescription: "",
     lat: null,
     lng: null,
+    placeImage: null,
   });
+
+  console.log("formData", formData);
 
   const [errors, setErrors] = useState({
     placeName: "",
     placePreferedName: "",
     placeDescription: "",
+    placeImage: "",
   });
 
   // hooks
@@ -51,14 +54,35 @@ function Form() {
 
   //handlers
   function handleInputChange(e) {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    const { name, value, type, files } = e.target;
+
+    // If it's a file input, store the file
+    if (type === "file") {
+      setFormData((prev) => ({ ...prev, [name]: files[0] }));
+    } else {
+      setFormData((prev) => ({ ...prev, [name]: value }));
+    }
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(formData)
-    formValidation(formData, setErrors);
+    const fd = new FormData();
+
+    fd.append("placeName", formData.placeName);
+    fd.append("placePreferedName", formData.placePreferedName);
+    fd.append("placeDescription", formData.placeDescription);
+    fd.append("lat", formData.lat);
+    fd.append("lng", formData.lng);
+
+    // Append the image file
+    if (formData.placeImage) {
+      fd.append("placeImage", formData.placeImage);
+    }
+
+    console.log(fd);
+
+    // Assuming formValidation is used for validation
+    formValidation(fd, setErrors);
   }
 
   return (
@@ -79,8 +103,9 @@ function Form() {
                   placeholder="Enter place name"
                   ref={inputRef}
                 />
-                {errors.placeName && <span className="error">{errors.placeName}</span>}
-
+                {errors.placeName && (
+                  <span className="error">{errors.placeName}</span>
+                )}
               </div>
               <div className="form-group">
                 <label htmlFor="map" className="form-group__label">
@@ -91,7 +116,10 @@ function Form() {
                 </div>
               </div>
               <div className="form-group">
-                <label htmlFor="placePreferedName" className="form-group__label">
+                <label
+                  htmlFor="placePreferedName"
+                  className="form-group__label"
+                >
                   Preferred Name
                 </label>
                 <input
@@ -102,7 +130,9 @@ function Form() {
                   value={formData.placePreferredName}
                   onChange={handleInputChange}
                 />
-                {errors.placePreferedName && <span className="error">{errors.placePreferedName}</span>}
+                {errors.placePreferedName && (
+                  <span className="error">{errors.placePreferedName}</span>
+                )}
 
                 <label htmlFor="placeDescription" className="form-group__label">
                   Description
@@ -113,7 +143,22 @@ function Form() {
                   placeholder="Tell us about the place"
                   onChange={handleInputChange}
                 ></textarea>
-                {errors.placeDescription && <span className="error">{errors.placeDescription}</span>}
+                {errors.placeDescription && (
+                  <span className="error">{errors.placeDescription}</span>
+                )}
+
+                <label htmlFor="placeImage" className="form-group__label">
+                  Your image of the place
+                </label>
+                <input
+                  type="file"
+                  name="placeImage"
+                  id="placeImage"
+                  onChange={handleInputChange}
+                  />
+                  {errors.placeImage && (
+                    <span className="error">{errors.placeImage}</span>
+                  )}
               </div>
               <button type="submit" className="btn btn-primary">
                 Add this place

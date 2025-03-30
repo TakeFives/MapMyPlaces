@@ -19,6 +19,11 @@ export function formValidation(formData, setErrors){
       isValid = false;
     }
 
+    if (!formData.placeImage) {
+      newErrors.placeDescription = "Image is required.";
+      isValid = false;
+    }
+
     setErrors(newErrors); 
     return isValid;
 }
