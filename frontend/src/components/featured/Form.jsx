@@ -2,10 +2,12 @@ import { useState, useEffect, useRef } from "react";
 import FormMap from "../templates/FormMap";
 import { useGoogleMapsApi } from "../../services/api/googleMapsApi.js";
 import { formValidation } from "../../services/validators/formValidation.js";
+import { addPlace } from "../../services/api/placesApi.js";
 
 function Form() {
   // state
   const { isLoaded } = useGoogleMapsApi();
+  const [isFormValid, setIsFormValid] = useState(false);
   const inputRef = useRef(null);
 
   const [formData, setFormData] = useState({
@@ -16,8 +18,6 @@ function Form() {
     lng: null,
     placeImage: null,
   });
-
-  console.log("formData", formData);
 
   const [errors, setErrors] = useState({
     placeName: "",
@@ -52,37 +52,54 @@ function Form() {
     return () => autocomplete.unbindAll();
   }, [isLoaded]);
 
+  
   //handlers
   function handleInputChange(e) {
     const { name, value, type, files } = e.target;
-
-    // If it's a file input, store the file
+  
+    let updatedFormData = { ...formData };
+  
     if (type === "file") {
-      setFormData((prev) => ({ ...prev, [name]: files[0] }));
+      updatedFormData[name] = files[0];
     } else {
-      setFormData((prev) => ({ ...prev, [name]: value }));
+      updatedFormData[name] = value;
     }
+  
+    setFormData(updatedFormData);
+  
+    const isValid = formValidation(updatedFormData, setErrors);
+    setIsFormValid(isValid);
   }
+  
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    const fd = new FormData();
 
-    fd.append("placeName", formData.placeName);
-    fd.append("placePreferedName", formData.placePreferedName);
-    fd.append("placeDescription", formData.placeDescription);
-    fd.append("lat", formData.lat);
-    fd.append("lng", formData.lng);
-
-    // Append the image file
-    if (formData.placeImage) {
-      fd.append("placeImage", formData.placeImage);
+    if(!isFormValid) return
+    
+    console.log("New place to add fd", formData);
+    try {
+      const newPlace = await addPlace(formData);
+      console.log("Added place", newPlace);
+  
+      setFormData({
+        placeName: "",
+        placePreferedName: "",
+        placeDescription: "",
+        lat: null,
+        lng: null,
+        placeImage: null,
+      });
+  
+      setErrors({
+        placeName: "",
+        placePreferedName: "",
+        placeDescription: "",
+        placeImage: "",
+      });
+    } catch (error) {
+      console.error("Error adding place:", error);
     }
-
-    console.log(fd);
-
-    // Assuming formValidation is used for validation
-    formValidation(fd, setErrors);
   }
 
   return (
@@ -155,12 +172,12 @@ function Form() {
                   name="placeImage"
                   id="placeImage"
                   onChange={handleInputChange}
-                  />
-                  {errors.placeImage && (
-                    <span className="error">{errors.placeImage}</span>
-                  )}
+                />
+                {errors.placeImage && (
+                  <span className="error">{errors.placeImage}</span>
+                )}
               </div>
-              <button type="submit" className="btn btn-primary">
+              <button type="submit" className="btn btn-primary" disabled={!isFormValid}>
                 Add this place
               </button>
             </form>

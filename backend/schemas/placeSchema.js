@@ -5,8 +5,9 @@ const placeSchema = new mongoose.Schema({
   description: String,
   lat: Number,
   lng: Number,
-  image: String
+  image: String,
 });
 
-export default mongoose.model("Place", placeSchema);
+const Place = mongoose.model("Place", placeSchema, 'places');
 
+export default Place;

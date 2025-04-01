@@ -3,6 +3,8 @@ import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 
+import placeRoutes from "./routes/placeRoutes.js";
+
 dotenv.config();
 
 const app = express();
@@ -21,5 +23,7 @@ mongoose.connect(MONGO_URI, {
 app.get("/", (req, res) => {
   res.send("API is running...");
 });
+
+app.use("/api/places", placeRoutes);
 
 export default app;
