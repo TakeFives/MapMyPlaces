@@ -8,7 +8,9 @@ function Form() {
   // state
   const { isLoaded } = useGoogleMapsApi();
   const [isFormValid, setIsFormValid] = useState(false);
-  const inputRef = useRef(null);
+  const formRef = useRef(null);
+
+  console.log('formRef', formRef)
 
   const [formData, setFormData] = useState({
     placeName: null,
@@ -28,10 +30,13 @@ function Form() {
 
   // hooks
   useEffect(() => {
-    if (!isLoaded || !window.google || !inputRef.current) return;
+    if (!isLoaded || !window.google || !formRef.current) return;
+
+    const inputElement = formRef.current.elements.placeName;
+    if (!inputElement) return;
 
     const autocomplete = new window.google.maps.places.Autocomplete(
-      inputRef.current,
+      inputElement,
       {
         types: ["geocode", "establishment"],
       }
@@ -81,6 +86,10 @@ function Form() {
     try {
       const newPlace = await addPlace(formData);
       console.log("Added place", newPlace);
+
+    if (formRef.current) {
+      formRef.current.reset();
+    }
   
       setFormData({
         placeName: "",
@@ -108,7 +117,7 @@ function Form() {
         <div className="container">
           <h2 className="text-center mb-4">Add your place</h2>
           <div className="map-container">
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} ref={formRef}> {/* useRef */}
               <div className="form-group">
                 <label htmlFor="placeName" className="form-group__label">
                   Place Name
@@ -118,7 +127,6 @@ function Form() {
                   className="form-control"
                   id="placeName"
                   placeholder="Enter place name"
-                  ref={inputRef}
                 />
                 {errors.placeName && (
                   <span className="error">{errors.placeName}</span>

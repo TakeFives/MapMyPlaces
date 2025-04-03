@@ -1,15 +1,31 @@
-import React, { useState } from "react";
-import data from "../../data/data.json";
+import React, { useState, useEffect } from "react";
+// import data from "../../data/data.json";
 import SingleMap from "../templates/SingleMap";
+import { getPlaces } from "../../services/api/placesApi";
 
 function Places() {
-  const places = data.locations;
+  // const places = data.locations;
+  const [places, setPlaces] = useState([]);
 
   const [activeItemMapId, setActiveItemMapId] = useState(null);
 
   const toggleShowMap = (id) => {
-    setActiveItemMapId((prevId) => (prevId === id ? null : id));
+    setActiveItemMapId((prevId) => {
+      return prevId === id ? null : id; 
+    });
   };
+
+  useEffect(() => {
+    async function fetchPlaces() {
+      try {
+        const data = await getPlaces();
+        setPlaces(data);
+      } catch (error) {
+        console.error("Error loading places:", error);
+      }
+    }
+    fetchPlaces();
+  }, []);
 
   return (
     <>
@@ -27,7 +43,7 @@ function Places() {
                   key={item.id}
                 >
                   <div className="card__preview container-fliud">
-                    {activeItemMapId === item.id ? (
+                    {activeItemMapId === item._id ? (
                       <div className="card__map">
                         <SingleMap place={item}/>
                       </div>
@@ -44,7 +60,7 @@ function Places() {
                     <button
                       type="button"
                       className="btn card__location-btn"
-                      onClick={() => toggleShowMap(item.id)}
+                      onClick={() => toggleShowMap(item._id)}
                     >
                       View map {item.name}
                     </button>

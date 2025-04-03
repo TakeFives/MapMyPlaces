@@ -16,11 +16,10 @@ const placeController = {
   addPlace: async function (req, res) {
     try {
         const placeData = req.body;
-        console.log('placeData', placeData)
   
         if (req.file) {
           const imageUrl = await placeModel.addFileImage(req.file);
-          placeData.imageUrl = imageUrl;
+          placeData.image = imageUrl;
         }
   
         const newPlace = await placeModel.add(placeData);
