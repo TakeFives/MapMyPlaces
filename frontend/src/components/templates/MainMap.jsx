@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { GoogleMap, InfoWindow, Marker } from "@react-google-maps/api";
 import { useGoogleMapsApi } from "../../services/api/googleMapsApi.js";
-import { locations } from "../../data/data.json";
+// import { locations } from "../../data/data.json";
+import { getPlaces } from "../../services/api/placesApi.js";
 
 function MainMap() {
-  const data = locations;
+  // const data = locations;
+  const [data, setData] = useState([]);
 
   const containerStyle = {
     width: "100%",
@@ -24,6 +26,18 @@ function MainMap() {
     });
     return bounds;
   };
+
+   useEffect(() => {
+      async function fetchPlaces() {
+        try {
+          const data = await getPlaces();
+          setData(data);
+        } catch (error) {
+          console.error("Error loading places:", error);
+        }
+      }
+      fetchPlaces();
+    }, []);
 
   useEffect(() => {
     if (map && data.length > 0) {

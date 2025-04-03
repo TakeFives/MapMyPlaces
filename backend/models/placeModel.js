@@ -38,8 +38,9 @@ const placeModel = {
         description: placeData.placeDescription,
         lat: placeData.lat,
         lng: placeData.lng,
-        image: placeData.imageUrl
+        image: placeData.image
       }); 
+      console.log('newPlace', newPlace)
       await newPlace.save(); 
       return newPlace;
     } catch (err) {
