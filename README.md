@@ -45,10 +45,11 @@ Ensure you have the following installed:
 1️⃣ **Clone the repository**  
 ```sh
 git clone https://github.com/your-username/MapMyPlaces.git
-cd MapMyPlaces
+cd MapMyPlaces/Backend
+cd MapMyPlaces/Frontend
 ```
 
-2️⃣ **Install dependencies**  
+2️⃣ **Install dependencies for FE and BK**  
 ```sh
 npm install
 ```
@@ -85,13 +86,13 @@ Planned roadmap:
 - Create basic Homepage Layout - DONE
 - Set Sections for Main Map and List of Places Below - DONE
 - Refactor App.jsx to Components - DONE
-- Switch/Connect LeafLet Maps / Geocoding API - **In progress**
-- Set Listener to retrieve coordinates data 
-- Integrate Google Maps API for place Name search
-- Make Adding New Places functionality
-- Make Fav Places Functionality
-- Add Places details
-- Add Authentication
+- Switch/Connect LeafLet Maps / Geocoding API - REVERTED
+- Set Listener to retrieve coordinates data - DONE
+- Integrate Google Maps API for place Name search - DONE
+- Make Adding New Places functionality - DONE
+- Make Fav Places Functionality - IN PROGRESS
+- Add Places details - DONE
+- Add Authentication - IN PROGRESS
 - Add page for User Fav Maps
 - Think of Map Layers and other features to implement
 
