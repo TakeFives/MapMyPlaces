@@ -30,6 +30,7 @@ by providing location details (name, latitude, longitude, and description).
 🖥️ **Frontend**: React.js (Vite, Bootstrap, Leaflet.js for maps)  
 🖥️ **Backend**: Node.js, Express.js  
 💾 **Database**: MongoDB (via Mongoose)  
+☁️ **Cloud Services**: AWS S3 (for image storage)  
 
 ## Installation
 
@@ -51,14 +52,26 @@ cd MapMyPlaces
 ```sh
 npm install
 ```
-<!-- 
+
 3️⃣ **Set up environment variables**  
-Create a `.env` file in the root directory and add the following:
+Create a `.env` file in the root directory and add the following for Frontend and Backend:
 ```env
+PORT=your-prefered-port
 MONGO_URI=your_mongodb_connection_string
+
 JWT_SECRET=your_secret_key
-PORT=5000
-``` -->
+JWT_REFRESH_SECRET=your-refresh-secret
+JWT_EXPIRES_IN=prefered-time
+JWT_REFRESH_EXPIRES_IN=prefered-expiry
+
+AWS_ACCESS_KEY_ID=your-aws-key
+AWS_SECRET_ACCESS_KEY=your-aws-secret-key
+AWS_REGION=prefered-aws-region
+AWS_BUCKET_NAME=your-bucket-name
+
+SALT_ROUNDS=your-prefered-number-of-salt
+
+```
 
 3️⃣ **Run the development server**  
 ```sh
