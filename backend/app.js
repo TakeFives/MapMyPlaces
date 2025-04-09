@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 
 import placeRoutes from "./routes/placeRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
 
 dotenv.config();
 
@@ -26,5 +27,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/places", placeRoutes);
+
+app.use("/api/users", userRoutes);
 
 export default app;

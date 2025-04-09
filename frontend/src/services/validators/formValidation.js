@@ -1,27 +1,28 @@
-export function formValidation(formData, setErrors) {
+export function formValidation(formData, setErrors, touchedFields) {
   const newErrors = { placeName: "", placePreferedName: "", placeDescription: "", placeImage: "" };
   let isValid = true;
 
-  if (!formData.placeName) {
+  if (touchedFields.placeName && !formData.placeName) {
     newErrors.placeName = "Place name is required.";
     isValid = false;
   }
 
-  if (!formData.placePreferedName) {
+  if (touchedFields.placePreferedName && !formData.placePreferedName) {
     newErrors.placePreferedName = "Preferred name is required.";
     isValid = false;
   }
 
-  if (!formData.placeDescription) {
+  if (touchedFields.placeDescription && !formData.placeDescription) {
     newErrors.placeDescription = "Description is required.";
     isValid = false;
   }
 
-  if (!formData.placeImage) {
+  if (touchedFields.placeImage && !formData.placeImage) {
     newErrors.placeImage = "Image is required.";
     isValid = false;
   }
 
-  setErrors(newErrors);  // Update the error messages
+  setErrors((prev) => ({ ...prev, ...newErrors }));
+  
   return isValid;
 }

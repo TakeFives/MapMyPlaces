@@ -56,7 +56,7 @@ function MainMap() {
         {/* Add markers */}
         {data.map((place) => (
           <Marker
-            key={place.id}
+            key={place._id}
             position={{ lat: place.lat, lng: place.lng }}
             title={place.name}
             onClick={() => setSelectedPlace(place)}
