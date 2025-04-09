@@ -40,7 +40,7 @@ function Places() {
                   className={`card flex-md-row flex-column-reverse ${
                     index % 2 === 0 ? "" : "flex-md-row-reverse"
                   }`}
-                  key={item.id}
+                  key={item._id}
                 >
                   <div className="card__preview container-fliud">
                     {activeItemMapId === item._id ? (

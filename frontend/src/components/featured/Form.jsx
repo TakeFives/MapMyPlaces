@@ -10,8 +10,6 @@ function Form() {
   const [isFormValid, setIsFormValid] = useState(false);
   const formRef = useRef(null);
 
-  console.log('formRef', formRef)
-
   const [formData, setFormData] = useState({
     placeName: null,
     placePreferedName: "",
@@ -26,6 +24,13 @@ function Form() {
     placePreferedName: "",
     placeDescription: "",
     placeImage: "",
+  });
+
+  const [touchedFields, setTouchedFields] = useState({
+    placeName: false,
+    placePreferedName: false,
+    placeDescription: false,
+    placeImage: false,
   });
 
   // hooks
@@ -57,40 +62,42 @@ function Form() {
     return () => autocomplete.unbindAll();
   }, [isLoaded]);
 
-  
   //handlers
+  function handleBlur(e) {
+    const { name } = e.target;
+    setTouchedFields((prev) => ({ ...prev, [name]: true }));
+  }
+
   function handleInputChange(e) {
     const { name, value, type, files } = e.target;
-  
+
     let updatedFormData = { ...formData };
-  
+
     if (type === "file") {
       updatedFormData[name] = files[0];
     } else {
       updatedFormData[name] = value;
     }
-  
+
     setFormData(updatedFormData);
-  
-    const isValid = formValidation(updatedFormData, setErrors);
+
+    const isValid = formValidation(updatedFormData, setErrors, touchedFields);
     setIsFormValid(isValid);
   }
-  
 
   async function handleSubmit(e) {
     e.preventDefault();
 
-    if(!isFormValid) return
-    
-    console.log("New place to add fd", formData);
+    if (!isFormValid) return;
+
     try {
       const newPlace = await addPlace(formData);
       console.log("Added place", newPlace);
 
-    if (formRef.current) {
-      formRef.current.reset();
-    }
-  
+      if (formRef.current) {
+        formRef.current.reset();
+      }
+
       setFormData({
         placeName: "",
         placePreferedName: "",
@@ -99,12 +106,19 @@ function Form() {
         lng: null,
         placeImage: null,
       });
-  
+
       setErrors({
         placeName: "",
         placePreferedName: "",
         placeDescription: "",
         placeImage: "",
+      });
+
+      setTouchedFields({
+        placeName: false,
+        placePreferedName: false,
+        placeDescription: false,
+        placeImage: false,
       });
     } catch (error) {
       console.error("Error adding place:", error);
@@ -117,7 +131,9 @@ function Form() {
         <div className="container">
           <h2 className="text-center mb-4">Add your place</h2>
           <div className="map-container">
-            <form onSubmit={handleSubmit} ref={formRef}> {/* useRef */}
+            <form onSubmit={handleSubmit} ref={formRef}>
+              {" "}
+              {/* useRef */}
               <div className="form-group">
                 <label htmlFor="placeName" className="form-group__label">
                   Place Name
@@ -154,8 +170,10 @@ function Form() {
                   placeholder="Your preferred name for this place"
                   value={formData.placePreferredName}
                   onChange={handleInputChange}
+                  // onBlur={handleBlur}
+                  onTouchStart={handleBlur}
                 />
-                {errors.placePreferedName && (
+                {touchedFields.placePreferedName && formData.placePreferedName.trim() === '' && (
                   <span className="error">{errors.placePreferedName}</span>
                 )}
 
@@ -167,6 +185,7 @@ function Form() {
                   name="placeDescription"
                   placeholder="Tell us about the place"
                   onChange={handleInputChange}
+                  onBlur={handleBlur}
                 ></textarea>
                 {errors.placeDescription && (
                   <span className="error">{errors.placeDescription}</span>
@@ -180,12 +199,17 @@ function Form() {
                   name="placeImage"
                   id="placeImage"
                   onChange={handleInputChange}
+                  onBlur={handleBlur}
                 />
                 {errors.placeImage && (
                   <span className="error">{errors.placeImage}</span>
                 )}
               </div>
-              <button type="submit" className="btn btn-primary" disabled={!isFormValid}>
+              <button
+                type="submit"
+                className="btn btn-primary"
+                disabled={!isFormValid}
+              >
                 Add this place
               </button>
             </form>
