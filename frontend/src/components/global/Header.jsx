@@ -1,6 +1,9 @@
 import React from "react";
+import { useAuth } from "../../hooks/useAuth";
 
 function Header() {
+  const { user } = useAuth();
+
   return (
     <header className="fixed-top bg-transparent">
       <nav className="navbar navbar-expand-lg navbar-light bg-dark">
@@ -29,25 +32,42 @@ function Header() {
           >
             <ul className="navbar-nav ms-auto mt-4 mb-4 mt-lg-0 mb-lg-0 text-center">
               <li className="nav-item">
-                <a className="nav-link" href="#hero">
+                <a className="nav-link" href="/">
                   Home
                 </a>
               </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#map">
-                  MyMap
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#places">
-                  MyPlaces
-                </a>
-              </li>
+              {user && (
+                <>
+                  <li className="nav-item">
+                    <a className="nav-link" href="my-map">
+                      MyMap
+                    </a>
+                  </li>
+                  <li className="nav-item">
+                    <a className="nav-link" href="my-places">
+                      MyPlaces
+                    </a>
+                  </li>
+                </>
+              )}
               <li className="nav-item">
                 <a className="nav-link" href="#contact">
                   Contact
                 </a>
               </li>
+              {!user ? (
+                <li className="nav-item">
+                  <a className="nav-link" href="/auth">
+                    Login
+                  </a>
+                </li>
+              ) : (
+                <li className="nav-item">
+                  <a className="nav-link" href="/logout">
+                    Logout
+                  </a>
+                </li>
+              )}
             </ul>
           </div>
         </div>

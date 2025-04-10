@@ -21,3 +21,8 @@ textarea:focus,
 button:focus {
   outline: 1px solid var(--clr-text-grey);
 }
+
+.text-link{
+  text-decoration: underline;
+  color: var( --clr-bg-link-dark);
+}

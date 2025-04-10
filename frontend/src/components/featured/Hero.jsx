@@ -1,6 +1,9 @@
 import React from "react";
+import { useAuth } from "../../hooks/useAuth";
 
 function Hero() {
+  const { user } = useAuth();
+
   return (
     <>
       <section
@@ -13,11 +16,11 @@ function Hero() {
             Map your places using address data or pin it to save
           </p>
           <a
-            href="#map"
+            href={user ? "/my-map" : "/auth"}
             aria-label="Go to Map section"
-            className="btn btn-primary"
+            className="btn btn-primary hero__cta"
           >
-            Check out the map
+            {user ? "Check out the map" : "Login to get started"}
           </a>
         </div>
       </section>
