@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { useAuth } from "../../hooks/useAuth";
 import FormMap from "../templates/FormMap";
 import { useGoogleMapsApi } from "../../services/api/googleMapsApi.js";
 import { formValidation } from "../../services/validators/formValidation.js";
@@ -6,6 +7,7 @@ import { addPlace } from "../../services/api/placesApi.js";
 
 function Form() {
   // state
+  const { user } = useAuth();
   const { isLoaded } = useGoogleMapsApi();
   const [isFormValid, setIsFormValid] = useState(false);
   const formRef = useRef(null);
@@ -131,7 +133,7 @@ function Form() {
         <div className="container">
           <h2 className="text-center mb-4">Add your place</h2>
           <div className="map-container">
-            <form onSubmit={handleSubmit} ref={formRef}>
+            {user ? <form onSubmit={handleSubmit} ref={formRef}>
               {" "}
               {/* useRef */}
               <div className="form-group">
@@ -212,7 +214,7 @@ function Form() {
               >
                 Add this place
               </button>
-            </form>
+            </form> : <p className="text-center">Please <a href="/auth" className="text-link">Login</a> to be able to add places</p>}
           </div>
         </div>
       </section>
