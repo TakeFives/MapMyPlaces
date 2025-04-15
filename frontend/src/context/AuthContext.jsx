@@ -1,33 +1,26 @@
-import { useEffect, useState } from "react";
-import Cookies from "js-cookie";
+import { useState } from "react";
 
 import { AuthContext } from './AuthContextInstance';
+import { fetchUser } from "../services/api/authApi";
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    const token = Cookies.get("accessToken");
-    if (token) {
-      setUser({ token });
-    }
-  }, []);
-
-  const login = (token) => {
-    Cookies.set("accessToken", token);
-    setUser({ token });
+  const setUserContext = async () => {
+    const user = await fetchUser();
+    setUser(user);
   };
 
-  const logout = () => {
-    Cookies.remove("accessToken");
+  const logoutUserContext = () => {
     setUser(null);
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, setUserContext, logoutUserContext }}>
       {children}
     </AuthContext.Provider>
   );
 };
+
 
 

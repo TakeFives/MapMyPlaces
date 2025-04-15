@@ -1,6 +1,6 @@
 import { hashPassword, verifyPassword } from "../utils/passwords.js";
 import userModel from "../models/userModel.js";
-import { createTokens, setTokenCookies } from "../utils/jwt.js";
+import { createTokens, setTokenCookies, verifyJWT } from "../utils/jwt.js";
 
 const userController = {
   registerUser: async function (req, res) {
@@ -24,6 +24,7 @@ const userController = {
     const { email, password } = req.body;
     try {
       const user = await userModel.getByEmail(email);
+      console.log('user', user);
       if (!user) {
         return res.status(401).json({ message: "Invalid email or password" });
       }
@@ -62,6 +63,36 @@ const userController = {
       res.status(500).send("Error fetching user: " + error.message);
     }
   },
+  getMe: async function (req, res) {
+    try {
+      const accessToken = req.accessToken;
+      const decoded = verifyJWT(accessToken, process.env.JWT_SECRET);
+
+      const user = await userModel.getById(decoded.id);
+
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+
+      res.json({
+        id: user.id,
+        name: user.name,
+        email: user.email,
+      });
+
+    } catch (error) {
+      res.status(401).json({ message: "Invalid or expired token" });
+    }
+  },
+  logoutUser: async function (req, res) {
+    try {
+      res.clearCookie("accessToken");
+      res.clearCookie("refreshToken");
+      res.status(200).json({ message: "Logged out successfully" });
+    } catch (error) {
+      res.status(500).send("Error logging out: " + error.message);
+    }
+  }
 };
 
 export default userController;

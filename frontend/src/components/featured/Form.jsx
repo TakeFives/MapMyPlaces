@@ -6,7 +6,6 @@ import { formValidation } from "../../services/validators/formValidation.js";
 import { addPlace } from "../../services/api/placesApi.js";
 
 function Form() {
-  // state
   const { user } = useAuth();
   const { isLoaded } = useGoogleMapsApi();
   const [isFormValid, setIsFormValid] = useState(false);
@@ -132,89 +131,95 @@ function Form() {
       <section id="form" className="py-5">
         <div className="container">
           <h2 className="text-center mb-4">Add your place</h2>
-          <div className="map-container">
-            {user ? <form onSubmit={handleSubmit} ref={formRef}>
-              {" "}
-              {/* useRef */}
-              <div className="form-group">
-                <label htmlFor="placeName" className="form-group__label">
-                  Place Name
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="placeName"
-                  placeholder="Enter place name"
-                />
-                {errors.placeName && (
-                  <span className="error">{errors.placeName}</span>
-                )}
-              </div>
-              <div className="form-group">
-                <label htmlFor="map" className="form-group__label">
-                  Map
-                </label>
-                <div id="map">
-                  <FormMap place={formData} isLoaded={isLoaded} />
+          <div className="">
+            {user ? (
+              <form onSubmit={handleSubmit} ref={formRef}>
+                <div className="form-group">
+                  <label htmlFor="placeName" className="form-group__label">
+                    Place Name
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="placeName"
+                    placeholder="Enter place name"
+                  />
+                  {errors.placeName && (
+                    <span className="error">{errors.placeName}</span>
+                  )}
                 </div>
-              </div>
-              <div className="form-group">
-                <label
-                  htmlFor="placePreferedName"
-                  className="form-group__label"
+                <div className="form-group">
+                  <label htmlFor="map" className="form-group__label">
+                    Map
+                  </label>
+                  <div id="map">
+                    <FormMap place={formData} isLoaded={isLoaded} />
+                  </div>
+                </div>
+                <div className="form-group">
+                  <label
+                    htmlFor="placePreferedName"
+                    className="form-group__label"
+                  >
+                    Preferred Name
+                  </label>
+                  <input
+                    type="text"
+                    id="placePreferedName"
+                    name="placePreferedName"
+                    placeholder="Your preferred name for this place"
+                    value={formData.placePreferredName}
+                    onChange={handleInputChange}
+                    // onBlur={handleBlur}
+                    onTouchStart={handleBlur}
+                  />
+                  {touchedFields.placePreferedName &&
+                    formData.placePreferedName.trim() === "" && (
+                      <span className="error">{errors.placePreferedName}</span>
+                    )}
+
+                  <label
+                    htmlFor="placeDescription"
+                    className="form-group__label"
+                  >
+                    Description
+                  </label>
+                  <textarea
+                    id="placeDescription"
+                    name="placeDescription"
+                    placeholder="Tell us about the place"
+                    onChange={handleInputChange}
+                    onBlur={handleBlur}
+                  ></textarea>
+                  {errors.placeDescription && (
+                    <span className="error">{errors.placeDescription}</span>
+                  )}
+
+                  <label htmlFor="placeImage" className="form-group__label">
+                    Your image of the place
+                  </label>
+                  <input
+                    type="file"
+                    name="placeImage"
+                    id="placeImage"
+                    onChange={handleInputChange}
+                    onBlur={handleBlur}
+                  />
+                  {errors.placeImage && (
+                    <span className="error">{errors.placeImage}</span>
+                  )}
+                </div>
+                <button
+                  type="submit"
+                  className="btn btn-primary"
+                  disabled={!isFormValid}
                 >
-                  Preferred Name
-                </label>
-                <input
-                  type="text"
-                  id="placePreferedName"
-                  name="placePreferedName"
-                  placeholder="Your preferred name for this place"
-                  value={formData.placePreferredName}
-                  onChange={handleInputChange}
-                  // onBlur={handleBlur}
-                  onTouchStart={handleBlur}
-                />
-                {touchedFields.placePreferedName && formData.placePreferedName.trim() === '' && (
-                  <span className="error">{errors.placePreferedName}</span>
-                )}
-
-                <label htmlFor="placeDescription" className="form-group__label">
-                  Description
-                </label>
-                <textarea
-                  id="placeDescription"
-                  name="placeDescription"
-                  placeholder="Tell us about the place"
-                  onChange={handleInputChange}
-                  onBlur={handleBlur}
-                ></textarea>
-                {errors.placeDescription && (
-                  <span className="error">{errors.placeDescription}</span>
-                )}
-
-                <label htmlFor="placeImage" className="form-group__label">
-                  Your image of the place
-                </label>
-                <input
-                  type="file"
-                  name="placeImage"
-                  id="placeImage"
-                  onChange={handleInputChange}
-                  onBlur={handleBlur}
-                />
-                {errors.placeImage && (
-                  <span className="error">{errors.placeImage}</span>
-                )}
-              </div>
-              <button
-                type="submit"
-                className="btn btn-primary"
-                disabled={!isFormValid}
-              >
-                Add this place
-              </button>
-            </form> : <p className="text-center">Please <a href="/auth" className="text-link">Login</a> to be able to add places</p>}
+                  Add this place
+                </button>
+              </form>
+            ) : (
+              <div className="text-center"> Please <a href="/auth" className="text-link">log in</a> to add a place</div>
+            )}
           </div>
         </div>
       </section>
