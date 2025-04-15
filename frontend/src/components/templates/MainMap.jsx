@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { GoogleMap, InfoWindow, Marker } from "@react-google-maps/api";
 import { useGoogleMapsApi } from "../../services/api/googleMapsApi.js";
-// import { locations } from "../../data/data.json";
 import { getPlaces } from "../../services/api/placesApi.js";
 
 function MainMap() {
-  // const data = locations;
   const [data, setData] = useState([]);
 
   const containerStyle = {
@@ -16,7 +14,6 @@ function MainMap() {
   const [map, setMap] = useState(null);
   const [selectedPlace, setSelectedPlace] = useState(null);
 
-  // Load Google Maps API
   const { isLoaded } = useGoogleMapsApi();
 
   const calculateBounds = () => {
@@ -44,7 +41,7 @@ function MainMap() {
       const bounds = calculateBounds();
       map.fitBounds(bounds);
     }
-  }, [map, data]);
+  }, [map, data, calculateBounds]);
 
   const handleLoad = (mapInstance) => {
     setMap(mapInstance);

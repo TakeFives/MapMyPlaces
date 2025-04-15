@@ -1,8 +1,21 @@
-import React from "react";
-import { useAuth } from "../../hooks/useAuth";
+import React, { useContext } from "react";
+import { AuthContext } from "../../context/AuthContextInstance";
+import { logout } from "../../services/api/authApi";
+import { Link } from "react-router";
 
 function Header() {
-  const { user } = useAuth();
+  const { user, logoutUserContext } = useContext(AuthContext);
+
+  function handleLogout(){
+    logout()
+      .then(() => {
+        window.location.href = "/";
+        logoutUserContext();
+      })
+      .catch((error) => {
+        console.error("Logout failed:", error);
+      });
+  }
 
   return (
     <header className="fixed-top bg-transparent">
@@ -39,14 +52,10 @@ function Header() {
               {user && (
                 <>
                   <li className="nav-item">
-                    <a className="nav-link" href="my-map">
-                      MyMap
-                    </a>
+                    <Link className="nav-link" to="/my-map">MyMap</Link>;
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="my-places">
-                      MyPlaces
-                    </a>
+                    <Link className="nav-link" to="/my-places">MyPlaces</Link>;
                   </li>
                 </>
               )}
@@ -63,7 +72,7 @@ function Header() {
                 </li>
               ) : (
                 <li className="nav-item">
-                  <a className="nav-link" href="/logout">
+                  <a className="nav-link" href="#" onClick={() => handleLogout()}>
                     Logout
                   </a>
                 </li>
