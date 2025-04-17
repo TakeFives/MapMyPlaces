@@ -52,10 +52,10 @@ function Header() {
               {user && (
                 <>
                   <li className="nav-item">
-                    <Link className="nav-link" to="/my-map">MyMap</Link>;
+                    <Link className="nav-link" to="/my-map">MyMap</Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link" to="/my-places">MyPlaces</Link>;
+                    <Link className="nav-link" to="/my-places">MyPlaces</Link>
                   </li>
                 </>
               )}

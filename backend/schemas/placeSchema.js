@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 const placeSchema = new mongoose.Schema({
+  userId: String,
   name: String,
   description: String,
   lat: Number,

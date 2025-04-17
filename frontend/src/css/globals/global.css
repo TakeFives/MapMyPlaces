@@ -18,7 +18,7 @@ input, textarea, select {
 
 input:focus,
 textarea:focus,
-button:focus {
+button:not(.gm-ui-hover-effect):focus {
   outline: 1px solid var(--clr-text-grey);
 }
 

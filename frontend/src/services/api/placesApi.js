@@ -30,3 +30,14 @@ export const addPlace = async (formData) => {
   }
 };
 
+export const getUserPlaces = async (userId) => {
+  try {
+    const response = await axios.get(`${API_URL}/user/${userId}`);
+    console.log(response.data.places);
+    return response.data.places; 
+  } catch (error) {
+    console.error("Error fetching places:", error);
+    throw error;
+  }
+};
+

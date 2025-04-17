@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
-// import data from "../../data/data.json";
 import SingleMap from "../templates/SingleMap";
 import { getPlaces } from "../../services/api/placesApi";
 
 function Places() {
-  // const places = data.locations;
   const [places, setPlaces] = useState([]);
 
   const [activeItemMapId, setActiveItemMapId] = useState(null);
