@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { GoogleMap, InfoWindow, Marker } from "@react-google-maps/api";
 import { useGoogleMapsApi } from "../../services/api/googleMapsApi.js";
-import { getPlaces } from "../../services/api/placesApi.js";
+import { getUserPlaces } from "../../services/api/placesApi.js";
+import { useAuth } from "../../hooks/useAuth";
 
-function MainMap() {
+function UserMap() {
+  const { user } = useAuth();
   const [data, setData] = useState([]);
 
   const containerStyle = {
@@ -16,7 +18,6 @@ function MainMap() {
 
   const { isLoaded } = useGoogleMapsApi();
 
-  
   const calculateBounds = () => {
     const bounds = new window.google.maps.LatLngBounds();
     data.forEach((place) => {
@@ -24,10 +25,11 @@ function MainMap() {
     });
     return bounds;
   };
+
   useEffect(() => {
     async function fetchPlaces() {
       try {
-        const data = await getPlaces();
+        const data = await getUserPlaces(user.id);
         setData(data);
       } catch (error) {
         console.error("Error loading places:", error);
@@ -41,13 +43,13 @@ function MainMap() {
       const bounds = calculateBounds();
       map.fitBounds(bounds);
     }
-  }, [map, data]);
+  }, [map, data, calculateBounds]);
 
   const handleLoad = (mapInstance) => {
     setMap(mapInstance);
   };
 
-  return (
+  return user ? (
     isLoaded && (
       <GoogleMap mapContainerStyle={containerStyle} onLoad={handleLoad}>
         {/* Add markers */}
@@ -56,6 +58,15 @@ function MainMap() {
             key={place._id}
             position={{ lat: place.lat, lng: place.lng }}
             title={place.name}
+            icon={{
+                path:
+                  "M24 4C19 -2 10 -1 10 6C10 10 24 22 24 22C24 22 38 10 38 6C38 -1 29 -2 24 4Z",
+                fillColor: "#e25555",
+                fillOpacity: 1,
+                strokeWeight: 0,
+                scale: 1.2, // bigger size here!
+                anchor: new window.google.maps.Point(24, 22),
+              }}
             onClick={() => setSelectedPlace(place)}
           ></Marker>
         ))}
@@ -83,7 +94,13 @@ function MainMap() {
         )}
       </GoogleMap>
     )
+  ) : (
+    <div className="text-center">
+      <h2>Please log in to view the map</h2>
+      <p>Map is only available for registered users.</p>
+      <p>Log in to see your personalized map with all your places.</p>
+    </div>
   );
 }
 
-export default MainMap;
+export default UserMap;

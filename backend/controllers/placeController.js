@@ -13,6 +13,19 @@ const placeController = {
     }
   },
 
+  getAllPlacesByUserId: async function (req, res) {
+    try {
+      const { userId } = req.params;
+      const places = await placeModel.getAllByUserId(userId);
+      res.json({
+        places: places,
+        message: 'ok'
+      });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  },
+
   addPlace: async function (req, res) {
     try {
         const placeData = req.body;

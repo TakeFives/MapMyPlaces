@@ -7,11 +7,13 @@ import { addPlace } from "../../services/api/placesApi.js";
 
 function Form() {
   const { user } = useAuth();
+  console.log("user", user);
   const { isLoaded } = useGoogleMapsApi();
   const [isFormValid, setIsFormValid] = useState(false);
   const formRef = useRef(null);
 
   const [formData, setFormData] = useState({
+    userId: user ? user.id : null,
     placeName: null,
     placePreferedName: "",
     placeDescription: "",
@@ -37,8 +39,9 @@ function Form() {
   // hooks
   useEffect(() => {
     if (!isLoaded || !window.google || !formRef.current) return;
-
     const inputElement = formRef.current.elements.placeName;
+    console.log('inputElement', inputElement);
+    
     if (!inputElement) return;
 
     const autocomplete = new window.google.maps.places.Autocomplete(
@@ -79,7 +82,7 @@ function Form() {
     } else {
       updatedFormData[name] = value;
     }
-
+    console.log("updatedFormData", updatedFormData);
     setFormData(updatedFormData);
 
     const isValid = formValidation(updatedFormData, setErrors, touchedFields);
@@ -99,7 +102,7 @@ function Form() {
         formRef.current.reset();
       }
 
-      setFormData({
+      setFormData({...formData,
         placeName: "",
         placePreferedName: "",
         placeDescription: "",
